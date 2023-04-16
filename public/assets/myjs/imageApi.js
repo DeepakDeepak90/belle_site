@@ -2,14 +2,15 @@ let arrayValue=JSON.parse(localStorage.getItem("data")) || [];
 let idOfCart;
 arrayValue.forEach(e=>{
   let aaa= document.getElementById("minicartsaman")  
+//   console.log(e.id);
      aaa.innerHTML+=`
      <li class="item">
      <a class="product-image" href="#">
          <img src="${e.img}" alt="Elastic Waist Dress - Black / Small" title="" />
      </a>
      <div class="product-details">
-         <a href="#" class="remove"><i class="anm anm-times-l" aria-hidden="true"></i></a>
-         <a href="#" class="edit-i remove"><i class="anm anm-edit" aria-hidden="true"></i></a>
+         <a href="#" class="remove"><i class="anm anm-times-l" aria-hidden="true" onclick="remove_cart_item(${e.id})"></i></a>
+         <a href="#" class="edit-i remove"><i class="anm anm-edit" aria-hidden="true"  ></i></a>
          <a class="pName" href="cart.html">Elastic Waist Dress</a>
          <div class="variant-cart">Gray / XXL</div>
          <div class="wrapQtyBtn">
@@ -20,7 +21,7 @@ arrayValue.forEach(e=>{
                  <a class="qtyBtn plus" href="javascript:void(0);"><i class="fa anm anm-plus-r" aria-hidden="true"></i></a>
              </div>
          </div>
-            <div class="priceRow">
+            <div class="priceRow">fv
              <div class="product-price">
                  <span class="money">${e.price}</span>
              </div>
@@ -145,4 +146,20 @@ function removeItem(id){
         }
     })   
 }
-
+function remove_cart_item(id) {
+    arrayValue.forEach(e=>{
+        if (id===e.id) {
+            
+            var fordelete = arrayValue.indexOf(e);
+            if (fordelete > -1) {
+                // alert(fordelete)
+                arrayValue.splice(fordelete, 1);
+                localStorage.setItem("data", JSON.stringify(arrayValue));
+                const myTimeout = setTimeout(myGreeting, 500);
+              }
+              function myGreeting() {
+                window.location.reload();
+              }
+        }
+    })
+}
