@@ -32,6 +32,32 @@ app.get("/productDetails",(req,res)=>{
     
     res.render("productDetails",{proid,MiniCartItem})
 })
+
+app.get("/createAccount",(req,res)=>{
+    
+    res.render("register")
+})
+
+app.get("/login",(req,res)=>{
+    
+    res.render("login")
+})
+app.get("/contact",(req,res)=>{
+    
+    res.render("contact-us")
+})
+app.get("/admin",(req,res)=>{
+    
+    res.render("admin")
+})
+app.get("/404",(req,res)=>{
+    
+    res.render("404")
+})
+app.get("/wishlist",(req,res)=>{
+    
+    res.render("wishlist")
+})
 app.get("/cart",(req,res)=>{
     
     res.render("cart",{proid,MiniCartItem})
