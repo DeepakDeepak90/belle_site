@@ -1,5 +1,6 @@
 const fs = require("fs");
 var proid;
+
 var MiniCartItem;
 const localStorage=require("node-localstorage");
 const express=require("express");
@@ -8,6 +9,7 @@ const path=require("path");
 const port=process.env.PORT ||3000;
 const bodyParser=require("body-parser");
 const e = require("express");
+const { log } = require("console");
 // const axios=require("axios");
 const app=express();
 app.use(express.urlencoded({extended:false}));
@@ -21,16 +23,17 @@ fs.readFile("api.json", function(err, data) {
       kurtiData=users;
     });
 //  Get Method Routig
+let total_price;
 app.get("/",(req,res)=>{
     const showMore = kurtiData.slice(0, 10);
     let size=kurtiData.length;
     // console.log(showMore);
-    res.render("index",{kurtiData,showMore,size,MiniCartItem})
+    res.render("index",{kurtiData,showMore,size,MiniCartItem,total_price})
 })
 
 app.get("/productDetails",(req,res)=>{
     
-    res.render("productDetails",{proid,MiniCartItem})
+    res.render("productDetails",{proid,MiniCartItem,total_price})
 })
 
 app.get("/createAccount",(req,res)=>{
@@ -60,16 +63,19 @@ app.get("/wishlist",(req,res)=>{
 })
 app.get("/cart",(req,res)=>{
     
-    res.render("cart",{proid,MiniCartItem})
+    res.render("cart",{proid,MiniCartItem,total_price})
 })
 app.get( "/getId/:id",(req,res)=>{
     let id=req.params.id
     proid=id;
 })
-app.get( "/cartLength/:d",(req,res)=>{
+
+app.get( "/price/:d",(req,res)=>{
     let id=req.params.d
-    console.log(id);
+    total_price=id;
+    console.log(total_price);
 })
+
 
 
 

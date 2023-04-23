@@ -1,8 +1,12 @@
 let arrayValue=JSON.parse(localStorage.getItem("data")) || [];
 let idOfCart;
+let total_price=0;
 arrayValue.forEach(e=>{
-  let aaa= document.getElementById("minicartsaman")  
-//   console.log(e.id);
+    let aaa= document.getElementById("minicartsaman")  
+    var d = parseInt(e.price);
+    total_price+= d;
+    
+fetch(`/price/${total_price}`,{method:"get"})
      aaa.innerHTML+=`
      <li class="item">
      <a class="product-image" href="#">
@@ -21,9 +25,9 @@ arrayValue.forEach(e=>{
                  <a class="qtyBtn plus" href="javascript:void(0);"><i class="fa anm anm-plus-r" aria-hidden="true"></i></a>
              </div>
          </div>
-            <div class="priceRow">fv
+            <div class="priceRow">Price :
              <div class="product-price">
-                 <span class="money">${e.price}</span>
+                 <span class="money">${e.price} Rs/-</span>
              </div>
          </div>
      </div>
